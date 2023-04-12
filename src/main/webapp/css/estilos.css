@@ -19,30 +19,41 @@
 }
 
 
-
-/* ESTILOS DEL MENÚ DE OPCIONES */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-image: url(../ejm/img/fondoverde.jpg);
-    border: sollid black;
+/*ESTILOS LOGIN*/
+body{
+    background-image: url(fondoverde.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+.contenedor{
+    width: 100%;
+    padding: 15px;
 }
 
 .login{
     width: 400px;
-    background: white ;
-    padding: 30px;
+    padding: 20px;
     margin: auto;
     margin-top: 150px;
     border-radius: 4px;
-    
     text-align: center;
-    padding: 20px;
-    box-shadow: 7px 13px 37px #000;
+    box-shadow: 7px 13px 37px #aaa;
 }
-.imagenes{
+h1{
+    text-align: center;
+    font-size: 30px;
+}
+.controls{
+    font-size: 16px;
+    width: 82%;
+    padding: 10px;
+    border: none;
+}
+.contenedor_icono{
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+}
+.contenedorimagenes{
     display: flex; 
     justify-content: space-between;
     gap: 45px;
@@ -52,22 +63,16 @@
     max-height: 200px;
     
 }
-.controls{
-    
-    padding: center;
-    
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #000;
-    color: #000;
-}
 .boton{
-    width: 100%;
+    width: 330px;
     background: #70A404;
     border: none;
-    padding: 12px;
+    padding: 10px;
     color: white;
-    margin: 5px 0;
     font-size: 16px;
+    cursor: pointer;
+}
+.fa-key{
+    min-width: 50px;
+    text-align: center;
 }
