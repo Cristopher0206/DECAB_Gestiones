@@ -22,7 +22,8 @@ public class LoginController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String password = request.getParameter("password");
-		if (password == "DECAB2022") {
+		System.out.println(password);
+		if (password.equals("DECAB2022")) {
 			// creamos la sesión
 			request.getRequestDispatcher("/MenuOpcionesController").forward(request, response);
 		} else {

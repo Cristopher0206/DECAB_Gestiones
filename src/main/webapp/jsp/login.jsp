@@ -11,7 +11,7 @@
 	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
 	crossorigin="anonymous">
 <!-- CSS only -->
-	<link rel="stylesheet" href="/css/estilos.css">
+	<link rel="stylesheet" href="../css/estilos.css">
 </head>
 <body>
 	<nav class="navbar navbar-dark bg-dark">
