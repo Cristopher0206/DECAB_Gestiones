@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="../css/menuOpciones.css">
 <style type="text/css">
 div.scroll_horizontal {
-	width: max-content;
+	width: 90%;
+	margin: 0px auto;
 	overflow: auto;
 	border: 1px solid #666;
 	background-color: #ccc;
@@ -26,9 +27,8 @@ div.scroll_horizontal {
 </head>
 <body>
 	<div class="imagenes">
-		<img class="imagen" src="../img/epn.png" alt=""> <img
-			class="imagen" src="../img/decab.png" alt="">
-
+		<img class="imagen" src="../img/epn.png" alt=""> 
+		<img class="imagen" src="../img/decab.png" alt="">
 	</div>
 	<section>
 		<div class="scroll_horizontal">
