@@ -17,7 +17,7 @@ public class LoginController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("jsp/login.jsp");
+		response.sendRedirect("../jsp/login.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,9 +25,9 @@ public class LoginController extends HttpServlet {
 		System.out.println(password);
 		if (password.equals("DECAB2022")) {
 			// creamos la sesión
-			request.getRequestDispatcher("/MenuOpcionesController").forward(request, response);
+			request.getRequestDispatcher("../MenuOpcionesController").forward(request, response);
 		} else {
-			response.sendRedirect("jsp/login.jsp");
+			response.sendRedirect("../jsp/login.jsp");
 		}
 	}
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <!--CSS de Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- FORMULARIO -->
+    <div class="container">
+        <br>
+        <h1 class="agendar-title">Registrar Equipo</h1>
+        <hr>
+        <form action="procesar_formulario.php" method="post">
+            <div class="form-container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label for="codEquipo">Código de Laboratorio para el Equipo</label>
+                            <input type="text" id="codEquipo" name="codEquipo" required> <br> <br>
+                            <label for="codBienes">Código de Bienes</label>
+                            <input type="text" id="codBienes" name="codBienes" required><br><br>
+                            <label for="nombre" style="text-align: left;">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                            <label for="marca" style="text-align: left;">Marca</label>
+                            <input type="text" id="marca" name="marca" required><br><br>
+                            <label for="modelo" style="text-align: left;">Modelo</label>
+                            <input type="text" id="modelo" name="modelo" required>
+                            <label for="numSerie" style="text-align: left;">Número de Serie</label>
+                            <input type="text" id="numSerie" name="numSerie" required><br><br>
+                            <label for="localizacion" style="text-align: left;">Localización dentro del
+                                Laboratorio</label>
+                            <input type="text" id="localizacion" name="localizacion" required><br><br>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <label for="clasificacion">Clasificación</label>
+                            <input type="text" id="clasificacion" name="clasificacion" required><br><br>
+                            <label for="fechaAdquisicion" tabindex="18">Fecha de Adquisición:</label>
+                            <input type="date" id="fechaAdquisicion" name="fechaAdquisicion" required><br><br>
+                            <label for="valorActual">Valor de Mercado Actual sin IVA</label>
+                            <input type="text" id="valorActual" name="valorActual" required><br><br>
+                            <label for="estado">Estado</label>
+                            <input type="text" id="estado" name="estado" required><br><br>
+                            <label for="custodio">Custodio</label>
+                            <input type="text" id="custodio" name="custodio" required><br><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <hr>
+                    <h4>Rango de Funcionamiento</h4>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <label for="rangMin">Rango mínimo</label> <br>
+                            <input type="text" id="rangMin" name="rangMin" value="ej. asdasda" required>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <label for="rangMax">Rango máximo</label> <br>
+                            <input type="text" id="rangMax" name="rangMax" required>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <label for="unidad">Rango mínimo</label> <br>
+                            <input type="text" id="unidad" name="unidad" required>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <hr>
+                            <h4>Proveedor</h4>
+                            <label for="proveedor">Proveedor:</label>
+                            <select id="proveedor" name="proveedor" required>
+                                <option value="">Seleccionar proveedor</option>
+                                <option value="">opción 1</option>
+                            </select>
+                            <input class="btn btn-primary" type="submit" value="Registrar Proveedor"
+                                style="margin-left: 20px;">
+                            <hr>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <hr>
+                            <h4>Responsable</h4>
+                            <label for="responsable">Proveedor:</label>
+                            <select id="responsable" name="responsable" required>
+                                <option value="">Seleccionar responsable</option>
+                                <option value="">opción 1</option>
+                            </select>
+                            <input class="btn btn-primary" type="submit" value="Registrar Responsable"
+                                style="margin-left: 20px;">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="comentario"><b>Observaciones / Comentarios:</b></label> <br>
+                            <textarea id="comentario" name="comentario" style="width: 50%; height: 250px;"></textarea><br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    </div>
+    </form>
+    <hr>
+    </div>
+</body>
+</body>
+
+</html>
