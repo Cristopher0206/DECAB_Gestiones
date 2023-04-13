@@ -1,8 +1,14 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import modelo.conexion.ConexionBDD;
+import conexion.ConexionBDD;
 
 public class Proveedor implements Serializable {
 	private static final long serialVersionUID = 2L;
@@ -14,6 +20,15 @@ public class Proveedor implements Serializable {
 
 	public Proveedor(){
 		
+	}
+
+	
+	public Proveedor(int id_proveedor, String nombre, String telefono, String email) {
+		super();
+		this.id_proveedor = id_proveedor;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.email = email;
 	}
 
 	public int getId_proveedor() {
@@ -55,9 +70,9 @@ public class Proveedor implements Serializable {
 		List<Proveedor> proveedores = new ArrayList<Proveedor>();
 		
 		//2.- Conectar a la BDD 
-		cnn = conexion.ConexionBDD.getConexion();
+		cnn = ConexionBDD.getConexion();
 		try {
-				r0s = cnn.prepareStatement(sql).executeQuery();
+				rs = cnn.prepareStatement(sql).executeQuery();
 				while(rs.next()) {
 					Proveedor p = new Proveedor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
 					proveedores.add(p);
@@ -66,7 +81,7 @@ public class Proveedor implements Serializable {
 				e.printStackTrace();
 			}finally {
 				//3.- Cerrar
-				conexion.ConexionBDD.cerrar(rs);
+				ConexionBDD.cerrar(rs);
 		}
 		return proveedores;
 	}
@@ -75,6 +90,68 @@ public class Proveedor implements Serializable {
 		
 		boolean bandera = false;
 		
-		String sql= "INSERT INTO proveedor"
+		String sql= "INSERT INTO proveedor (id_proveedor,nombre,telefono,email) VALUES (?,?,?,?)";
+		PreparedStatement pstm = null;
+		try {
+			pstm = ConexionBDD.getConexion().prepareStatement(sql);
+			pstm.setString(1, p.getNombre());
+			pstm.setString(2, p.getTelefono());
+			pstm.setString(3, p.getEmail());
+			int filas = pstm.executeUpdate();
+			System.out.println("Número de filas afectadas: " + filas);
+			bandera = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConexionBDD.cerrar(pstm);
+		}
+		return bandera;
 	}
+	
+	public boolean update(Proveedor p) {
+		boolean respuesta = false;
+		
+		//Variables
+		String sql = "UPDATE PROVEEDOR SET nombre = ?, telefono = ?, email = ? WHERE id_proveedor = ?"; 
+		PreparedStatement pstm = null;
+		//Conectar a la BDD
+		try {
+			pstm = ConexionBDD.getConexion().prepareStatement(sql);
+			pstm.setString(1, p.getNombre());
+			pstm.setString(2, p.getTelefono());
+			pstm.setString(3, p.getEmail());
+			pstm.setInt(4, getId_proveedor());
+			int filas = pstm.executeUpdate();
+			System.out.println("Número de filas ejecutadas: " + filas);
+			respuesta = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConexionBDD.cerrar(pstm);
+		}
+		
+		return respuesta;
+	}
+	
+	public boolean delete(int idProveedor) {
+		boolean respuesta = false;	
+		//Variables
+		String sql = "DELETE FROM PROVEEDOR WHERE id_proveedor = ?";
+		PreparedStatement pstm = null; 
+		
+		//Conectar a BDD
+		try {
+			pstm = ConexionBDD.getConexion().prepareStatement(sql);
+			pstm.setInt(1, idProveedor);
+			int filas = pstm.executeUpdate();
+			System.out.println("Número de filas ejecutadas: " + filas);
+			respuesta = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConexionBDD.cerrar(pstm);
+		}
+		return respuesta;
+	}
+	
 }

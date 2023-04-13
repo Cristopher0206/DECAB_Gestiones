@@ -1,6 +1,14 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import conexion.ConexionBDD;
 
 public class Equipo implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -17,7 +25,7 @@ public class Equipo implements Serializable{
 	private String unidad;
 	private String clasificacion;
 	private String fecha_adqu;
-	private String valor_merc_sin_iva;
+	private Double valor_merc_sin_iva;
 	private String estado;
 	private String custodio;
 	private String observaciones;
@@ -28,7 +36,7 @@ public class Equipo implements Serializable{
 
 	public Equipo(String cod_lab, String cod_bienes, String nombre, String marca, String modelo, String num_serie,
 			String loc_lab, String rang_fun_min, String rang_fun_max, String unidad, String clasificacion,
-			String fecha_adqu, String valor_merc_sin_iva, String estado, String custodio, String observaciones) {
+			String fecha_adqu, Double valor_merc_sin_iva, String estado, String custodio, String observaciones) {
 		super();
 		this.cod_lab = cod_lab;
 		this.cod_bienes = cod_bienes;
@@ -144,11 +152,11 @@ public class Equipo implements Serializable{
 		this.fecha_adqu = fecha_adqu;
 	}
 
-	public String getValor_merc_sin_iva() {
+	public Double getValor_merc_sin_iva() {
 		return valor_merc_sin_iva;
 	}
 
-	public void setValor_merc_sin_iva(String valor_merc_sin_iva) {
+	public void setValor_merc_sin_iva(Double valor_merc_sin_iva) {
 		this.valor_merc_sin_iva = valor_merc_sin_iva;
 	}
 
@@ -176,5 +184,125 @@ public class Equipo implements Serializable{
 		this.observaciones = observaciones;
 	}
 	
+	public List<Equipo> getEquipos(){
+		String sql= "SELECT * FROM EQUIPO";
+		Connection cnn = null;
+		ResultSet rs = null;
+		List<Equipo> equipos= new ArrayList<Equipo>();
+		
+		//2.- Conectar a la BDD 
+		cnn = ConexionBDD.getConexion();
+		try {
+				rs = cnn.prepareStatement(sql).executeQuery();
+				while(rs.next()) {
+					Equipo e = new Equipo(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), 
+							rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 
+							rs.getString(10), rs.getString(11), rs.getString(12), rs.getDouble(13), rs.getString(14), 
+							rs.getString(15), rs.getString(16));
+					equipos.add(e);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				//3.- Cerrar
+				ConexionBDD.cerrar(rs);
+		}
+		return equipos;
+	}
+	
+	public boolean create(Equipo eq) {
+		
+		boolean bandera = false;
+		
+		String sql= "INSERT INTO EQUIPO (cod_lab,cod_bienes,nombre,marca,modelo,num_serie,loc_lab,rang_fun_min,"
+				+ "rang_fun_max,unidad,clasificacion,fecha_adqu,valor_merc_sin_iva,estado,custodio,"
+				+ "observaciones) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement pstm = null;
+		try {
+			pstm = ConexionBDD.getConexion().prepareStatement(sql);
+			pstm.setString(1, eq.getCod_lab());
+			pstm.setString(2, eq.getCod_bienes());
+			pstm.setString(3, eq.getNombre());
+			pstm.setString(4, eq.getMarca());
+			pstm.setString(5, eq.getModelo());
+			pstm.setString(6, eq.getNum_serie());
+			pstm.setString(7, eq.getLoc_lab());
+			pstm.setString(8, eq.getRang_fun_min());
+			pstm.setString(9, eq.getRang_fun_max());
+			pstm.setString(10, eq.getUnidad());
+			pstm.setString(11, eq.getClasificacion());
+			pstm.setString(12, eq.getFecha_adqu());
+			pstm.setDouble(13, eq.getValor_merc_sin_iva());
+			pstm.setString(14, eq.getEstado());
+			pstm.setString(15, eq.getCustodio());
+			pstm.setString(16, eq.getObservaciones());
+			int filas = pstm.executeUpdate();
+			System.out.println("Número de filas afectadas: " + filas);
+			bandera = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConexionBDD.cerrar(pstm);
+		}
+		return bandera;
+	}
+	
+	public boolean update(Equipo eq) {
+		boolean respuesta = false;
+		
+		//Variables
+		String sql = "UPDATE EQUIPO SET cod_bienes = ?, nombre = ?, marca = ?, modelo = ?, num_serie = ?, loc_lab = ?, rang_fun_min = ?, rang_fun_max = ?, unidad = ?, clasificacion = ?, fecha_adqu = ?, valor_merc_sin_iva = ?, estado = ?, custodio = ?, observaciones = ? WHERE cod_lab = ?"; 
+		PreparedStatement pstm = null;
+		//Conectar a la BDD
+		try {
+			pstm = ConexionBDD.getConexion().prepareStatement(sql);
+			pstm.setString(1, eq.getCod_lab());
+			pstm.setString(2, eq.getCod_bienes());
+			pstm.setString(3, eq.getNombre());
+			pstm.setString(4, eq.getMarca());
+			pstm.setString(5, eq.getModelo());
+			pstm.setString(6, eq.getNum_serie());
+			pstm.setString(7, eq.getLoc_lab());
+			pstm.setString(8, eq.getRang_fun_min());
+			pstm.setString(9, eq.getRang_fun_max());
+			pstm.setString(10, eq.getUnidad());
+			pstm.setString(11, eq.getClasificacion());
+			pstm.setString(12, eq.getFecha_adqu());
+			pstm.setDouble(13, eq.getValor_merc_sin_iva());
+			pstm.setString(14, eq.getEstado());
+			pstm.setString(15, eq.getCustodio());
+			pstm.setString(16, eq.getObservaciones());
+			int filas = pstm.executeUpdate();
+			System.out.println("Número de filas ejecutadas: " + filas);
+			respuesta = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConexionBDD.cerrar(pstm);
+		}
+		
+		return respuesta;
+	}
+	
+	public boolean delete(String cod_lab) {
+		boolean respuesta = false;	
+		//Variables
+		String sql = "DELETE FROM EQUIPO WHERE cod_lab = ?";
+		PreparedStatement pstm = null; 
+		
+		//Conectar a BDD
+		try {
+			pstm = ConexionBDD.getConexion().prepareStatement(sql);
+			pstm.setString(1, cod_lab);
+			int filas = pstm.executeUpdate();
+			System.out.println("Número de filas ejecutadas: " + filas);
+			respuesta = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			ConexionBDD.cerrar(pstm);
+		}
+		return respuesta;
+	}
 	
 }
