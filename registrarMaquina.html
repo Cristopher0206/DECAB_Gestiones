@@ -81,46 +81,113 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <hr>
                             <h4>Proveedor</h4>
-                            <label for="proveedor">Proveedor:</label>
-                            <select id="proveedor" name="proveedor" required>
-                                <option value="">Seleccionar proveedor</option>
-                                <option value="">opción 1</option>
-                            </select>
-                            <input class="btn btn-primary" type="submit" value="Registrar Proveedor"
-                                style="margin-left: 20px;">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <label for="proveedor">Proveedor:</label>
+                                    <select id="proveedor" name="proveedor" required>
+                                        <option value="">Seleccionar proveedor</option>
+                                        <option value="">opción 1</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div style="text-align: right">
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#proveedormodal">
+                                            Registrar Proveedor
+                                        </button>
+                                        <input class="btn btn-success" type="submit" value="Registrar Proveedor">
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <hr>
                             <h4>Responsable</h4>
-                            <label for="responsable">Proveedor:</label>
-                            <select id="responsable" name="responsable" required>
-                                <option value="">Seleccionar responsable</option>
-                                <option value="">opción 1</option>
-                            </select>
-                            <input class="btn btn-primary" type="submit" value="Registrar Responsable"
-                                style="margin-left: 20px;">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <label for="responsable">Responsable:</label>
+                                    <select id="responsable" name="responsable" required>
+                                        <option value="">Seleccionar responsable</option>
+                                        <option value="">opción 1</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div style="text-align: right">
+                                        <input class="btn btn-success" type="submit" value="Registrar Responsable">
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
                         </div>
                     </div>
                 </div>
-                <br>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <label for="comentario"><b>Observaciones / Comentarios:</b></label> <br>
-                            <textarea id="comentario" name="comentario" style="width: 50%; height: 250px;"></textarea><br><br>
+                            <textarea id="comentario" name="comentario"
+                                style="width: 100%; height: 150px;"></textarea><br><br>
                         </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <input class="btn btn-primary" type="submit" value="Registrar Equipo">
+                        <input class="btn btn-danger" type="submit" value="Cancelar">
                     </div>
                 </div>
             </div>
-
-
     </div>
     </form>
     <hr>
     </div>
-</body>
+    <!--MODALS-->
+    <div class="modal fade" id="proveedormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="..." method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tituloModalHabilidad">Habilidad</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <span class="mb-3">Seleccione una habilidad:</span><br>
+                        <div class="cs-form">
+                            <label for="titulo_habilidad" class="form-label">Habilidad:</label>
+                            <select id="titulo_habilidad" name="titulo_habilidad" class="form-select"
+                                aria-label="Habilidad" style="margin: 0 5px">
+                                <option selected style="background-color: gray"></option>
+                                {% for habilidadCatalogo in catalogo_habilidades %}
+                                <option>{{ habilidadCatalogo }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="cs-form">
+                            <label for="descripcion_habilidad" class="form-label">Descripción:</label>
+                            <input type="text" id="descripcion_habilidad" name="descripcion_habilidad"
+                                class="form-control">
+                        </div>
+                        <div class="cs-form">
+                            <label for="horas_experiencia_habilidad" class="form-label">Horas de experiencia:</label>
+                            <input type="number" id="horas_experiencia_habilidad" name="horas_experiencia_habilidad"
+                                class="form-control" min="1">
+                        </div>
+                        <input type="hidden" id="id_voluntario" name="id_voluntario" value="{{ voluntario.id }}">
+                        <input type="hidden" id="id_habilidad" name="id_habilidad" value="">
+                        <input type="hidden" id="operacion" name="operacion" value="creacion">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Agregar habilidades</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- My scripts -->
+    <script type="text/javascript" src="voluntario_script.js"></script>
 </body>
 
 </html>
